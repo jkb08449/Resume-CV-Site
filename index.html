@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&family=Montserrat&family=Sacramento&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Keaton Brown</title>
+  </head>
+<body>
+    <nav>
+        <p>Keaton Brown</p>
+        <p>
+            <a href="contact.html">Contact Keaton Brown</a>
+        </p>
+    </nav>
+
+    <header>
+        <h1>Keaton Brown</h1>
+        <img src="images/headshot.jpg" alt="Picture of Keaton Brown" width="200">
+    </header>
+        <p class="address">
+            100 Sanford Dr, Athens, GA 30602 &ndash;
+            (123) 456-7890 &ndash;
+            jkb08449@uga.edu
+        </p>
+
+        <p class="tagline">
+            I am a computer science student at the University of Georgia with an interest in making creative programs.
+            I enjoy solving problems in unique ways that make the process fun to create.
+        </p>
+
+    
+
+    <hr>
+    
+    <section>
+        <h3>Education</h3>
+        <dl>
+            <dt>The University Of Georgia</dt>
+            <dd>GPA: 3.7</dd>
+        </dl>
+        <dl>
+            <dt>Bachelor of Science in Computer Science</dt>
+            <dd>Graduation Date: May 2026</dd>
+        </dl>
+    </section>
+    
+    <section>
+        <h3>Honors and Awards</h3>
+        <dl>
+            <dt>UGA Dean's List</dt>
+            <dd>2024</dd>
+            <dt>UGA Dean's List</dt>
+            <dd>2025</dd>
+        </dl>
+    </section>
+
+    <section>
+        <h3>Skills</h3>
+        <ul>
+            <li>C#</li>
+            <li>C++</li>
+            <li>Java</li>
+            <li>Python</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Leadership and Experiences</h3>
+            <dl>
+                <dt><a href="https://www.publix.com">Publix</a></dt>
+                <dd>2022</dd>
+            </dl>
+    </section>
+        
+    <section>
+        <h3>Projects</h3>
+          <div class="three-col">
+            <div class="card">
+              <h3>HTML Starter</h3>
+              <div class="media-container">
+                <img src="images/html.jpg" alt="HTML Starter Project Screenshot">
+              </div>
+              <ul>
+                  <li>Provided by Github Classroom</li>
+                  <li>My first project in CSCI 4300!!!</li>
+                  <li>Used HTML</li>
+              </ul>
+            </div>
+          <div class="card recursive-card">
+              <h3>This Resume</h3>
+              <div class="iframe-container">
+                <iframe src="index.html?depth=1" class="recursive-iframe" title="Recursive Resume Preview"></iframe>
+              </div>
+              <ul>
+                  <li>Made with relentless Claude prompting</li>
+                  <li>May require additional RAM</li>
+                  <li>Works best in fullscreen</li>
+              </ul>
+          </div>
+          <div class="card">
+              <h3>Ejecting Bed</h3>
+              <video src="images/img_1041.mp4" autoplay loop muted playsinline width="1000"></video>
+              <ul>
+                  <li>Made at my house for fun</li>
+                  <li>Coded using an arduino</li>
+                  <li>I hit snooze less now</li>
+              </ul>
+          </div>
+        </div>
+    </section>
+
+   <footer>
+        <p>
+            &copy;
+            <a href="contact.html">Keaton Brown</a>
+            <a
+                href="https://www.linkedin.com/in/keaton-brown-1816a23a7/"
+                target="_blank"
+            >
+            <i class="fa-brands fa-linkedin"></i>
+            </a>
+        </p>
+    </footer>
+
+
+<script>
+    (function() {
+        const params = new URLSearchParams(window.location.search);
+        const depth = parseInt(params.get('depth')) || 0;
+
+        // Hide scrollbar and zoom out when inside iframe
+        if (window.self !== window.top) {
+            document.documentElement.style.overflow = 'hidden';
+            document.body.style.transform = 'scale(0.5)';
+            document.body.style.transformOrigin = 'top left';
+            document.body.style.width = '200%';
+        } else {
+            // Scale main page to 80%
+            document.body.style.zoom = '0.8';
+        }
+
+        // Update child iframe depth (limit to 4 recursions)
+        const iframes = document.querySelectorAll('.recursive-iframe');
+        if (depth < 4) {
+            iframes.forEach(function(iframe) {
+                iframe.src = 'index.html?depth=' + (depth + 1);
+            });
+        } else {
+            iframes.forEach(function(iframe) {
+                iframe.remove();
+            });
+        }
+
+        // Sync scroll from parent to child iframes
+        window.addEventListener('scroll', function() {
+            const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+            iframes.forEach(function(iframe) {
+                try {
+                    iframe.contentWindow.postMessage({
+                        type: 'syncScroll',
+                        scrollPercent: scrollPercent
+                    }, '*');
+                } catch(e) {}
+            });
+        });
+
+        // Listen for scroll sync messages from parent
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'syncScroll') {
+                // Depth 1: 0.3, Depth 2+: 1.2 (4x)
+                const scale = depth >= 2 ? 1.2 : 0.3;
+                const scrollPercent = event.data.scrollPercent * scale;
+                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                window.scrollTo(0, scrollPercent * maxScroll);
+            }
+        });
+    })();
+</script>
+</body>
+</html>
